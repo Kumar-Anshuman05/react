@@ -1,1 +1,151 @@
+// ========================================
+// STEP 1:
+// Create an array named students.
+// Each element should be an object.
+// Each object must contain:
+// - name (string)
+// - marks (array of numbers representing subjects)
+// ========================================
+
+const students=[
+    {name:"Rahul",marks:[85,78,92]},
+    {name:"Priya",marks:[58,64,70]},
+    {name:"Arjun",marks:[95,88,90]},
+    {name:"Sneha",marks:[45,50,40]},
+    {name:"Kiran",marks:[72,68,74]}
+]
+
+// ========================================
+// STEP 2:
+// Create a function named calculateTotal.
+// The function should:
+// - Accept an array of marks as parameter.
+// - Use a for loop to iterate through the array.
+// - Add all the marks.
+// - Return the total sum.
+// ========================================
+
+function calculateTotal(marks){
+    let sum=0
+    for(let i=0;i<marks.length;i++){
+        sum+= marks[i]
+    }
+    return sum
+}
+// console.log(calculateTotal([10,20,30,40,44]));
+
+
+// ========================================
+// STEP 3:
+// Create a function named calculateAvg.
+// The function should:
+// - Call calculateTotal to get total marks.
+// - Divide total by number of subjects.
+// - Return the calculated average.
+// ========================================
+
+function calculateAvg(marks){
+    let totalMarks=calculateTotal(marks)
+    let avg = totalMarks/marks.length;
+    return avg
+}
+// console.log(calculateAvg([85,79,49]));
+
+
+// ========================================
+// STEP 4:
+// Display all students.
+// - Loop through the students array.
+// - For each student:
+//     - Calculate total marks.
+//     - Calculate average marks.
+//     - Print student name, total, and average.
+// ========================================
+
+for(let i=0;i<students.length;i++){
+    let totalMarks=calculateTotal(students[i].marks);
+    let average=calculateAvg(students[i].marks);
+    console.log(`Name : ${students[i].name}`);
+    console.log(`Total Marks : ${totalMarks}`);
+    console.log(`Average Marks : ${average.toFixed(2)}`);
+    console.log("-------------------------------------");   
+}
+
+// ========================================
+// STEP 5:
+// Display only passed students.
+// Condition:
+// - A student passes if average >= 60.
+// - Use an if condition inside the loop.
+// - Print name and average of passed students.
+// ========================================
+
+for(let j=0;j<students.length;j++){
+    let avg = calculateAvg(students[j].marks);
+    if(avg>=60){
+        console.log(`passed student : ${students[j].name} with a average of ${avg.toFixed(2)}`);   
+    }
+}
+
+// ========================================
+// STEP 6:
+// Find the topper.
+// - Assume first student is the topper initially.
+// - Compare averages one by one.
+// - If a student has higher average,
+//     update topper.
+// - After loop, print topper details.
+// ========================================
+let topper = students[0];
+let highAvg = calculateAvg(students[0].marks)
+for(let i=1;i<students.length;i++){
+    let curAvg= calculateAvg(students[i].marks)
+    if (curAvg>highAvg){
+        highAvg = curAvg
+        topper = students[i]
+    }
+}
+console.log(`topper is ${topper.name} with average of ${highAvg}`);
+// ========================================
+// STEP 7:
+// Calculate class average.
+// - Add average of all students.
+// - Divide by total number of students.
+// - Print class average.
+// ========================================
+let TotalclassAvg=0;
+for(let i=0;i<students.length;i++){
+    TotalclassAvg+= calculateAvg(students[i].marks)
+}
+let classAvg = TotalclassAvg/students.length
+console.log(`class average is : ${classAvg.toFixed(2)}`);
+
+
+// ========================================
+// STEP 8:
+// Assign grades to each student.
+// Rules:
+// - 90+   → Grade A
+// - 75–89 → Grade B
+// - 60–74 → Grade C
+// - Below 60 → Fail
+// - Print name and grade for each student.
+// ========================================
+for(let i=0;i<students.length;i++){
+    let avg=calculateAvg(students[i].marks)
+    let grade;
+    if(avg>=90){
+        grade="A"
+    }else if(avg>=75 && avg<90){
+        grade="B"
+    }else if(avg>=60 && avg<75){
+        grade="C"
+    }else{
+        grade="Fail"
+    }
+    console.log(`Name : ${students[i].name} and Grade : ${grade}`);
+    console.log("---------------------------");
+}
+
+
 
